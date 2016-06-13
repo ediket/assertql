@@ -7,7 +7,6 @@ npm install assertql -S
 # Usage
 
 ```js
-import { expect } from 'chai';
 import _ from 'lodash';
 import {
   GraphQLObjectType,
