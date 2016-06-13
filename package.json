@@ -1,7 +1,7 @@
 {
-  "name": "graphql-permission",
+  "name": "assertql",
   "version": "0.0.0",
-  "description": "GraphQL permission",
+  "description": "Assert graphql field for check permission, etc",
   "main": "lib",
   "files": [
     "lib"
@@ -15,19 +15,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/ediket/graphql-permission.git"
+    "url": "git+ssh://git@github.com/ediket/assertql.git"
   },
   "keywords": [
     "graphql",
     "permission",
-    "graphql-permission"
+    "assert",
+    "assertql"
   ],
   "author": "ironhee <leechulhee95@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ediket/graphql-permission/issues"
+    "url": "https://github.com/ediket/assertql/issues"
   },
-  "homepage": "https://github.com/ediket/graphql-permission#readme",
+  "homepage": "https://github.com/ediket/assertql#readme",
   "peerDependencies": {
     "graphql": "^0.5.0"
   },
