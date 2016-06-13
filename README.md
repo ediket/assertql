@@ -13,7 +13,7 @@ import {
   GraphQLObjectType,
   GraphQLString,
 } from 'graphql';
-import withAssertions from '../withAssertions';
+import { withAssertions } from 'assertql';
 
 
 const loggedIn = (data, info, context) => {
