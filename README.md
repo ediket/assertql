@@ -37,12 +37,15 @@ const hasRole = (role) => (data, info, context) => {
 const userType = new GraphQLObjectType({
   name: 'User',
   fields: withAssertions({
+    loggedIn,
+    adminOrSelf: _.some(hasRole('admin'), self),
+  }, {
     id: {
       type: GraphQLString,
     },
     email: {
       type: GraphQLString,
-      assertions: [loggedIn, _.some(hasRole('admin'), self)],
+      assertions: ['loggedIn', 'adminOrSelf'],
     },
   }),
 });
