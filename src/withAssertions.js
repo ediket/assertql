@@ -36,11 +36,9 @@ function withAssertions(asserts, fields) {
           }, Promise.resolve({}))
           .value();
 
-        _.each(assertionResults, assertionResult => {
-          if (assertionResult !== true) {
-            throw assertionResult;
-          }
-        });
+        if (_.every(assertionResults, assertionResult => assertionResult !== true)) {
+          throw assertionResults[0];
+        }
 
         return resolve(data, info, context);
       },
