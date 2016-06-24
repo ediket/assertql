@@ -1,6 +1,6 @@
 {
   "name": "assertql",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Assert graphql field for check permission, etc",
   "main": "lib",
   "files": [
@@ -29,9 +29,6 @@
     "url": "https://github.com/ediket/assertql/issues"
   },
   "homepage": "https://github.com/ediket/assertql#readme",
-  "peerDependencies": {
-    "graphql": "^0.5.0"
-  },
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-eslint": "^6.0.4",
