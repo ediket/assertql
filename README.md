@@ -11,18 +11,13 @@ import _ from 'lodash';
 import {
   GraphQLObjectType,
   GraphQLString,
+  GraphQLInt,
 } from 'graphql';
 import { withAssertions } from 'assertql';
 
 
 const loggedIn = (data, info, context) => {
   if (!_.get(context, 'rootValue.currentUser.id')) {
-    throw new Error('User dose not have enough permission!');
-  }
-};
-
-const self = (data, info, context) => {
-  if (data.id !== _.get(context, 'rootValue.currentUser.id'))
     throw new Error('User dose not have enough permission!');
   }
 };
@@ -34,18 +29,34 @@ const hasRole = (role) => (data, info, context) => {
   }
 };
 
+const isAdmin = hasRole('admin');
+
+const isMe = (data, info, context) => {
+  if (data.id !== _.get(context, 'rootValue.currentUser.id'))
+    throw new Error('User dose not have enough permission!');
+  }
+};
+
 const userType = new GraphQLObjectType({
   name: 'User',
   fields: withAssertions({
     loggedIn,
-    adminOrSelf: _.some(hasRole('admin'), self),
+    isAdmin,
+    isMe,
   }, {
     id: {
       type: GraphQLString,
+      // if no assertion, field is public
     },
     email: {
       type: GraphQLString,
-      assertions: ['loggedIn', 'adminOrSelf'],
+      // logged in user, self, admin can read this field
+      assertions: ['loggedIn', 'isMe', 'isAdmin'],
+    },
+    point: {
+      type: GraphQLInt,
+      // self, admin can read this field
+      assertions: ['isMe', 'isAdmin'],
     },
   }),
 });
