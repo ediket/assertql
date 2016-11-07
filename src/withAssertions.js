@@ -13,7 +13,7 @@ function withAssertions(asserts, fields) {
 
     return {
       ...field,
-      resolve: async (data, info, context) => {
+      resolve: async (data, args, context, info) => {
         const assertionResults = await _.chain(asserts)
           .pick(assertions)
           .reduce(async (memo, assert, assertKey) => {
@@ -21,7 +21,7 @@ function withAssertions(asserts, fields) {
 
             if (!result) {
               try {
-                await assert(data, info, context);
+                await assert(data, args, context, info);
                 result = true;
               } catch (err) {
                 result = err;
@@ -40,7 +40,7 @@ function withAssertions(asserts, fields) {
           throw assertionResults[0];
         }
 
-        return resolve(data, info, context);
+        return resolve(data, args, context, info);
       },
     };
   });

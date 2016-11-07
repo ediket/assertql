@@ -12,23 +12,23 @@ import withAssertions from '../withAssertions';
 describe('withAssertions', () => {
   const SAMPLE_USER = { id: '1', email: 'foo@test.com', name: 'foo' };
 
-  const loggedIn = (data, info, context) => {
-    if (!_.get(context, 'rootValue.currentUser.id')) {
+  const loggedIn = (data, args, context, info) => {
+    if (!_.get(info, 'rootValue.currentUser.id')) {
       throw new Error('User dose not have enough permission!');
     }
   };
 
-  const isMe = (data, info, context) => {
-    loggedIn(data, info, context);
-    const userId = _.get(context, 'rootValue.currentUser.id');
+  const isMe = (data, args, context, info) => {
+    loggedIn(data, args, context, info);
+    const userId = _.get(info, 'rootValue.currentUser.id');
     if (userId !== data.id) {
       throw new Error('User dose not have enough permission!');
     }
   };
 
-  const isAdmin = (data, info, context) => {
-    loggedIn(data, info, context);
-    const roles = _.get(context, 'rootValue.currentUser.roles');
+  const isAdmin = (data, args, context, info) => {
+    loggedIn(data, args, context, info);
+    const roles = _.get(info, 'rootValue.currentUser.roles');
     if (!_.includes(roles, 'admin')) {
       throw new Error('User dose not have enough permission!');
     }
@@ -78,6 +78,7 @@ describe('withAssertions', () => {
 
     const userRootValue = { currentUser: { id: '1', roles: ['user'] } };
     const userResult = await graphql(schema, query, userRootValue);
+
     expect(userResult.errors).to.be.empty;
     expect(userResult.data).to.deep.equal({
       user: _.pick(SAMPLE_USER, 'id', 'email'),
