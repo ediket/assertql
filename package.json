@@ -7,6 +7,7 @@
     "lib"
   ],
   "scripts": {
+    "release": "sh ./scripts/release.sh",
     "test": "mocha --compilers js:babel-register --timeout 20000 --recursive src/",
     "build": "babel --ignore *-test.js -d lib src",
     "clean": "rimraf lib",
