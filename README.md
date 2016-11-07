@@ -16,14 +16,14 @@ import {
 import { withAssertions } from 'assertql';
 
 
-const loggedIn = (data, info, context) => {
-  if (!_.get(context, 'rootValue.currentUser.id')) {
+const loggedIn = (data, args, context, info) => {
+  if (!_.get(info, 'rootValue.currentUser.id')) {
     throw new Error('User dose not have enough permission!');
   }
 };
 
-const hasRole = (role) => (data, info, context) => {
-  const roles = _.get(context, 'rootValue.currentUser.roles', []);
+const hasRole = (role) => (data, args, context, info) => {
+  const roles = _.get(info, 'rootValue.currentUser.roles', []);
   if (!_.includes(roles, role)) {
     throw new Error('User dose not have enough permission!');
   }
@@ -31,8 +31,8 @@ const hasRole = (role) => (data, info, context) => {
 
 const isAdmin = hasRole('admin');
 
-const isMe = (data, info, context) => {
-  if (data.id !== _.get(context, 'rootValue.currentUser.id'))
+const isMe = (data, args, context, info) => {
+  if (data.id !== _.get(info, 'rootValue.currentUser.id'))
     throw new Error('User dose not have enough permission!');
   }
 };
