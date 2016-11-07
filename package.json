@@ -1,6 +1,6 @@
 {
   "name": "assertql",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Assert graphql field for check permission, etc",
   "main": "lib",
   "files": [
