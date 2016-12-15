@@ -1,6 +1,6 @@
 {
   "name": "assertql",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Assert graphql field for check permission, etc",
   "main": "lib",
   "files": [
@@ -42,7 +42,7 @@
     "eslint": "^2.10.2",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^1.8.0",
-    "graphql": "^0.7.2",
+    "graphql": ">=0.8.2",
     "mocha": "^2.5.3",
     "rimraf": "^2.5.1"
   },
